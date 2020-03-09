@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import UserNotifications
 
 class ToDoListViewController: UIViewController {
     
-    var toDoItems: [ToDoItem] = []
+    // var toDoItems: [ToDoItem] = []
+    var toDoItems = ToDoItems()
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addBarButton: UIBarButtonItem!
@@ -23,13 +25,22 @@ class ToDoListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        toDoItems.loadData {
+            self.tableView.reloadData()
+        }
+
+        LocalNotificationManager.authorizeLocalNotifications(viewController: self)
+    }
+    
+    func saveData() {
+        toDoItems.saveData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             let destination = segue.destination as!  ToDoTableViewController
             let selectedIndexPath = tableView.indexPathForSelectedRow!
-            destination.toDoItem = toDoItems[selectedIndexPath.row]
+            destination.toDoItem = toDoItems.itemsArray[selectedIndexPath.row]
         } else {
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 tableView.deselectRow(at: selectedIndexPath, animated: true)
@@ -39,16 +50,17 @@ class ToDoListViewController: UIViewController {
     }
     
     @IBAction func unwindFromDetail(segue: UIStoryboardSegue) {
-         let source = segue.source as!  ToDoTableViewController
+        let source = segue.source as!  ToDoTableViewController
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
-            toDoItems[selectedIndexPath.row] = source.toDoItem
+            toDoItems.itemsArray[selectedIndexPath.row] = source.toDoItem
             tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
         } else {
             let newIndexPath = IndexPath(row: toDoArray.count, section: 0)
-            toDoItems.append(source.toDoItem)
+            toDoItems.itemsArray.append(source.toDoItem)
             tableView.insertRows(at: [newIndexPath], with: .bottom)
             tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
         }
+        saveData()
     }
     
     @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
@@ -65,29 +77,40 @@ class ToDoListViewController: UIViewController {
     
 }
 
-extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource {
+extension ToDoListViewController: UITableViewDelegate, UITableViewDataSource, ListTableViewCellDelegate {
+    func checkBoxToggle(sender: ListTableViewCell) {
+        if let selectedIndexPath = tableView.indexPath(for: sender) {
+            toDoItems.itemsArray[selectedIndexPath.row].completed = !toDoItems.itemsArray[selectedIndexPath.row].completed
+            tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
+            saveData()
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return toDoItems.count
+        return toDoItems.itemsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = toDoItems[indexPath.row].name
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ListTableViewCell
+        cell.delegate = self
+        cell.toDoItem = toDoItems.itemsArray[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            toDoItems.remove(at: indexPath.row)
+            toDoItems.itemsArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            saveData()
         }
         
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let itemToMove = toDoItems[sourceIndexPath.row]
-        toDoItems.remove(at: sourceIndexPath.row)
-        toDoItems.insert(itemToMove, at: destinationIndexPath.row)
+        let itemToMove = toDoItems.itemsArray[sourceIndexPath.row]
+        toDoItems.itemsArray.remove(at: sourceIndexPath.row)
+        toDoItems.itemsArray.insert(itemToMove, at: destinationIndexPath.row)
+        saveData()
     }
     
 }

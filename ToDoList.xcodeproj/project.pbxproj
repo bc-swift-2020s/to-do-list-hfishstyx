@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		4B5CE2E023F1F3FB00FA576D /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CE2DF23F1F3FB00FA576D /* ToDoItem.swift */; };
+		4B6719D52416C76200722BBB /* UIViewController+alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6719D42416C76200722BBB /* UIViewController+alert.swift */; };
+		4B6A2AA72416A8C700611625 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6A2AA62416A8C700611625 /* ListTableViewCell.swift */; };
+		4B6A2AA92416B64600611625 /* ToDoItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6A2AA82416B64600611625 /* ToDoItems.swift */; };
+		4B6A2AAB2416C06500611625 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6A2AAA2416C06500611625 /* LocalNotificationManager.swift */; };
 		4B6B4D0323EF446300661477 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6B4D0223EF446300661477 /* AppDelegate.swift */; };
 		4B6B4D0523EF446300661477 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6B4D0423EF446300661477 /* SceneDelegate.swift */; };
 		4B6B4D0A23EF446300661477 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B6B4D0823EF446300661477 /* Main.storyboard */; };
@@ -38,6 +42,10 @@
 
 /* Begin PBXFileReference section */
 		4B5CE2DF23F1F3FB00FA576D /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
+		4B6719D42416C76200722BBB /* UIViewController+alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+alert.swift"; sourceTree = "<group>"; };
+		4B6A2AA62416A8C700611625 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		4B6A2AA82416B64600611625 /* ToDoItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItems.swift; sourceTree = "<group>"; };
+		4B6A2AAA2416C06500611625 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		4B6B4CFF23EF446300661477 /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B6B4D0223EF446300661477 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4B6B4D0423EF446300661477 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,9 +113,13 @@
 			children = (
 				4B6B4D0223EF446300661477 /* AppDelegate.swift */,
 				4B6B4D0423EF446300661477 /* SceneDelegate.swift */,
+				4B6A2AAA2416C06500611625 /* LocalNotificationManager.swift */,
+				4B6719D42416C76200722BBB /* UIViewController+alert.swift */,
 				4B5CE2DF23F1F3FB00FA576D /* ToDoItem.swift */,
+				4B6A2AA82416B64600611625 /* ToDoItems.swift */,
 				4B6E315223F1DBB7002D0640 /* ToDoListViewController.swift */,
 				4B6E314E23F1DA70002D0640 /* ToDoTableViewController.swift */,
+				4B6A2AA62416A8C700611625 /* ListTableViewCell.swift */,
 				4B6B4D0823EF446300661477 /* Main.storyboard */,
 				4B6B4D0B23EF446900661477 /* Assets.xcassets */,
 				4B6B4D0D23EF446900661477 /* LaunchScreen.storyboard */,
@@ -266,10 +278,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B6E315323F1DBB7002D0640 /* ToDoListViewController.swift in Sources */,
+				4B6A2AA92416B64600611625 /* ToDoItems.swift in Sources */,
 				4B6E314F23F1DA70002D0640 /* ToDoTableViewController.swift in Sources */,
+				4B6719D52416C76200722BBB /* UIViewController+alert.swift in Sources */,
 				4B5CE2E023F1F3FB00FA576D /* ToDoItem.swift in Sources */,
 				4B6B4D0323EF446300661477 /* AppDelegate.swift in Sources */,
 				4B6B4D0523EF446300661477 /* SceneDelegate.swift in Sources */,
+				4B6A2AAB2416C06500611625 /* LocalNotificationManager.swift in Sources */,
+				4B6A2AA72416A8C700611625 /* ListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
